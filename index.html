@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Too Good To Go</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #F5F5F5;
+            color: #1A1A1A;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+        }
+        
+        .app-container {
+            max-width: 430px;
+            margin: 0 auto;
+            background: #F5F5F5;
+            height: 100vh;
+            height: 100dvh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            position: relative;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .header {
+            background: #F5F5F5;
+            padding: 50px 16px 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .back-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+        
+        .header-title {
+            font-size: 17px;
+            font-weight: 600;
+            flex: 1;
+            text-align: center;
+            margin-right: 40px;
+        }
+        
+        .content {
+            padding: 0 16px 24px;
+        }
+        
+        .store-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+        
+        .store-logo {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            margin: 0 auto 12px;
+            background: linear-gradient(135deg, #2D5A4A 0%, #1A3D2F 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+            text-align: center;
+            line-height: 1.2;
+            box-shadow: 0 2px 8px rgba(45, 90, 74, 0.2);
+        }
+        
+        .store-name {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .store-address {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+        
+        .find-store-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #2D5A4A;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(45, 90, 74, 0.08);
+        }
+        
+        .order-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #E5E5E5;
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 12px 0;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+            color: #999;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .tab.active {
+            color: #2D5A4A;
+            font-weight: 600;
+        }
+        
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 20%;
+            right: 20%;
+n            height: 2px;
+            background: #2D5A4A;
+            border-radius: 2px 2px 0 0;
+        }
+        
+        .order-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .detail-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .detail-value {
+            font-size: 15px;
+            font-weight: 500;
+            color: #1A1A1A;
+        }
+        
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 12px 0;
+            border-top: 1px solid #F0F0F0;
+        }
+        
+        .item-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        
+        .item-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .item-name {
+            font-size: 15px;
+            font-weight: 500;
+            color: #1A1A1A;
+        }
+        
+        .item-price {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1A1A1A;
+        }
+        
+        .packaging-info {
+            margin-top: 16px;
+            padding: 16px;
+            background: #F9F9F9;
+            border-radius: 12px;
+        }
+        
+        .packaging-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+        
+        .packaging-text {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .action-btn {
+            width: 100%;
+            padding: 16px;
+            background: #2D5A4A;
+            color: white;
+            border: none;
+            border-radius: 28px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 12px rgba(45, 90, 74, 0.25);
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        
+        .action-btn:active {
+            transform: scale(0.98);
+            opacity: 0.9;
+        }
+        
+        .reminder-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 12px;
+            background: transparent;
+            color: #2D5A4A;
+            border: none;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .bottom-sheet {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 24px 24px 0 0;
+            padding: 20px 24px 40px;
+            z-index: 1001;
+            transform: translateY(100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            max-width: 430px;
+            margin: 0 auto;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .bottom-sheet.active {
+            transform: translateY(0);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        
+        .modal-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1A1A1A;
+        }
+        
+        .close-btn {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #F5F5F5;
+            cursor: pointer;
+            border: none;
+            -webkit-appearance: none;
+        }
+        
+        .modal-content {
+            text-align: center;
+        }
+        
+        .quantity-badge {
+            width: 48px;
+            height: 48px;
+            background: #2D5A4A;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 700;
+            margin: 0 auto 16px;
+        }
+        
+        .modal-item-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1A1A1A;
+            margin-bottom: 4px;
+        }
+        
+        .modal-store-name {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 16px;
+        }
+        
+        .order-code {
+            display: inline-block;
+            background: #2D5A4A;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .modal-divider {
+            height: 1px;
+            background: #E5E5E5;
+            margin: 20px 0;
+        }
+        
+        .modal-instruction {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 24px;
+            padding: 0 8px;
+        }
+        
+        .swipe-wrapper {
+            position: relative;
+            height: 56px;
+            margin: 0 auto;
+        }
+        
+        .swipe-container {
+            position: relative;
+            height: 56px;
+            background: #E8F5F0;
+            border-radius: 28px;
+            overflow: hidden;
+        }
+        
+        .swipe-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2D5A4A;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        
+        .swipe-handle {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 48px;
+            height: 48px;
+            background: #2D5A4A;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            z-index: 10;
+            cursor: pointer;
+        }
+        
+        .swipe-handle svg {
+            width: 24px;
+            height: 24px;
+            color: white;
+            pointer-events: none;
+        }
+        
+        .success-content {
+            display: none;
+            text-align: center;
+            padding: 20px 0;
+        }
+        
+        .success-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+        
+        .checkmark-circle {
+            width: 72px;
+            height: 72px;
+            background: #2D5A4A;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            animation: scaleIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .checkmark-circle svg {
+            width: 36px;
+            height: 36px;
+            color: white;
+        }
+        
+        @keyframes scaleIn {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .success-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #2D5A4A;
+            margin-bottom: 8px;
+        }
+        
+        .success-text {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .spinner {
+            width: 48px;
+            height: 48px;
+            border: 3px solid #E5E5E5;
+            border-top-color: #2D5A4A;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .rating-screen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #F5F5F5;
+            z-index: 2000;
+            overflow-y: auto;
+            max-width: 430px;
+            margin: 0 auto;
+        }
+        
+        .rating-screen.active {
+            display: block;
+        }
+        
+        .rating-card {
+            background: #3D9970;
+            margin: 70px 16px 16px;
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            color: white;
+        }
+        
+        .rating-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        
+        .stars {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        .star {
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+        }
+        
+        .star svg {
+            width: 100%;
+            height: 100%;
+            fill: none;
+            stroke: white;
+            stroke-width: 2;
+            transition: fill 0.2s;
+        }
+        
+        .star.filled svg {
+            fill: white;
+        }
+        
+        .order-card.retrieved {
+            border: 2px solid #2D5A4A;
+        }
+        
+        .status-banner {
+            background: #2D5A4A;
+            color: white;
+            padding: 12px;
+            margin: -20px -20px 16px -20px;
+            border-radius: 14px 14px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            pointer-events: none;
+            z-index: 3000;
+        }
+        
+        @keyframes confetti-fall {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="header">
+            <div class="back-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 18l-6-6 6-6"/>
+                </svg>
+            </div>
+            <h1 class="header-title">Votre commande</h1>
+        </div>
+        
+        <div class="content">
+            <div class="store-card">
+                <div class="store-logo">Le P'tit<br>Mitron</div>
+                <h2 class="store-name">Le P'tit Mitron</h2>
+                <p class="store-address">144 Rue Saint-Denis, 93100 Montreuil, France</p>
+                <a href="#" class="find-store-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                    Trouver le commerce
+                </a>
+            </div>
+            
+            <div class="order-card" id="orderCard">
+                <div class="tabs">
+                    <div class="tab active">Je récupère<br>la commande</div>
+                    <div class="tab">Demander à<br>un ami</div>
+                </div>
+                
+                <div class="order-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Date</span>
+                        <span class="detail-value">21 févr. 2026</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Heure de collecte</span>
+                        <span class="detail-value">19:00 - 21:00</span>
+                    </div>
+                </div>
+                
+                <div class="order-item">
+                    <div class="item-info">
+                        <span class="item-label">Panier Surprise</span>
+                        <span class="item-name">1x Panier boulangerie</span>
+                    </div>
+                    <div class="item-info" style="text-align: right;">
+                        <span class="item-label">Total</span>
+                        <span class="item-price">2,49 €</span>
+                    </div>
+                </div>
+                
+                <div class="packaging-info">
+                    <div class="packaging-label">Emballage</div>
+                    <div class="packaging-text">
+                        Le commerçant fournira l'emballage, mais nous vous encourageons à apporter votre propre sac pour ramener le panier chez vous.
+                    </div>
+                </div>
+            </div>
+            
+            <button class="action-btn" id="collectBtn">
+                Cliquer pour récupérer
+            </button>
+            
+            <button class="reminder-btn" id="reminderBtn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                </svg>
+                Recevoir un rappel
+            </button>
+            
+            <div style="text-align: center; margin-top: 24px; font-size: 13px; color: #2D5A4A; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">
+                Sur votre chemin !
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal-overlay" id="modalOverlay"></div>
+    
+    <div class="bottom-sheet" id="bottomSheet">
+        <div class="modal-header">
+            <h3 class="modal-title">Commande à récupérer</h3>
+            <button class="close-btn" id="closeModalBtn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="modal-content" id="modalContent">
+            <div class="quantity-badge">1x</div>
+            <div class="modal-item-name">Panier boulangerie</div>
+            <div class="modal-store-name">Le P'tit Mitron</div>
+            <div class="order-code">CYEPD376HE060</div>
+            
+            <div class="modal-divider"></div>
+            
+            <div class="modal-instruction">
+                Validez ci-dessous et montrez l'écran au commerçant. Assurez-vous de ne confirmer qu'une fois que vous êtes chez le commerçant pour récupérer votre panier.
+            </div>
+            
+            <div class="swipe-wrapper" id="swipeWrapper">
+                <div class="swipe-container" id="swipeContainer">
+                    <div class="swipe-bg" id="swipeText">Glisser pour valider →</div>
+                    <div class="swipe-handle" id="swipeHandle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                            <path d="M9 18l6-6-6-6"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="success-content" id="successContent">
+            <div class="checkmark-circle">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                    <path d="M20 6L9 17l-5-5"/>
+                </svg>
+            </div>
+            <div class="success-title">Collecte confirmée</div>
+            <div class="success-text">
+                Montrez l'écran au commerçant pour<br>récupérer votre panier !
+            </div>
+        </div>
+        
+        <div class="success-content" id="loadingContent">
+            <div class="spinner"></div>
+        </div>
+    </div>
+    
+    <div class="rating-screen" id="ratingScreen">
+        <div class="header" style="padding-top: 50px;">
+            <div class="back-btn" id="closeRatingBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 18l-6-6 6-6"/>
+                </svg>
+            </div>
+            <h1 class="header-title">Votre commande</h1>
+        </div>
+        
+        <div style="padding: 0 16px;">
+            <div class="rating-card">
+                <div class="rating-title">Comment s'est passée votre expérience globale ?</div>
+                <div class="stars">
+                    <div class="star" data-rating="1">
+                        <svg viewBox="0 0 24 24">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                    </div>
+                    <div class="star" data-rating="2">
+                        <svg viewBox="0 0 24 24">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                    </div>
+                    <div class="star" data-rating="3">
+                        <svg viewBox="0 0 24 24">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                    </div>
+                    <div class="star" data-rating="4">
+                        <svg viewBox="0 0 24 24">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                    </div>
+                    <div class="star" data-rating="5">
+                        <svg viewBox="0 0 24 24">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="order-card retrieved">
+                <div class="status-banner">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                        <path d="M20 6L9 17l-5-5"/>
+                    </svg>
+                    Récupérée
+                </div>
+                
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                    <div class="store-logo" style="width: 48px; height: 48px; font-size: 8px; margin: 0;">Le P'tit<br>Mitron</div>
+                    <div>
+                        <div style="font-weight: 700; font-size: 16px;">Le P'tit Mitron</div>
+                        <div style="font-size: 13px; color: #666;">144 Rue Saint-Denis, 93100 Montreuil, Fr...</div>
+                    </div>
+                </div>
+                
+                <div class="order-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Récupérée</span>
+                        <span class="detail-value">21 févr. 2026</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">N° de commande</span>
+                        <span class="detail-value" style="font-family: monospace; font-size: 13px;">CYEPD376HE060</span>
+                    </div>
+                </div>
+                
+                <div class="order-item">
+                    <div class="item-info">
+                        <span class="item-label">Panier Surprise</span>
+                        <span class="item-name">1x Panier boulangerie</span>
+                    </div>
+                    <div class="item-info" style="text-align: right;">
+                        <span class="item-label">Total</span>
+                        <span class="item-price">2,49 €</span>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid #F0F0F0;">
+                    <div class="detail-label" style="margin-bottom: 4px;">Moyen de paiement</div>
+                    <div class="detail-value">Credit Card: Mastercard</div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 24px;">
+                <div style="width: 32px; height: 32px; border: 2px solid #2D5A4A; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; color: #2D5A4A; font-weight: 700;">?</div>
+                <div style="font-size: 14px; color: #666;">Besoin d'aide ?</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const collectBtn = document.getElementById('collectBtn');
+        const modalOverlay = document.getElementById('modalOverlay');
+        const bottomSheet = document.getElementById('bottomSheet');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const swipeHandle = document.getElementById('swipeHandle');
+        const swipeText = document.getElementById('swipeText');
+        const modalContent = document.getElementById('modalContent');
+        const successContent = document.getElementById('successContent');
+        const loadingContent = document.getElementById('loadingContent');
+        const ratingScreen = document.getElementById('ratingScreen');
+        const closeRatingBtn = document.getElementById('closeRatingBtn');
+        
+        let isDragging = false;
+        let startX = 0;
+        let currentX = 0;
+        const THRESHOLD = 150;
+        
+        function openModal() {
+            modalOverlay.style.display = 'block';
+            bottomSheet.style.display = 'block';
+            setTimeout(() => {
+                modalOverlay.classList.add('active');
+                bottomSheet.classList.add('active');
+            }, 10);
+        }
+        
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+            bottomSheet.classList.remove('active');
+            setTimeout(() => {
+                modalOverlay.style.display = 'none';
+                bottomSheet.style.display = 'none';
+                resetModal();
+            }, 300);
+        }
+        
+        function resetModal() {
+            modalContent.style.display = 'block';
+            successContent.classList.remove('active');
+            loadingContent.classList.remove('active');
+            resetSwipe();
+        }
+        
+        collectBtn.addEventListener('click', openModal);
+        closeModalBtn.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', closeModal);
+        
+        function resetSwipe() {
+            currentX = 0;
+            swipeHandle.style.transform = 'translateX(0px)';
+            swipeHandle.style.transition = 'none';
+            swipeText.style.opacity = 1;
+        }
+        
+        function handleStart(e) {
+            isDragging = true;
+            startX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+            swipeHandle.style.transition = 'none';
+            e.preventDefault();
+        }
+        
+        function handleMove(e) {
+            if (!isDragging) return;
+            const x = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+            const diff = x - startX;
+            currentX = Math.max(0, Math.min(diff, 200));
+            swipeHandle.style.transform = `translateX(${currentX}px)`;
+            swipeText.style.opacity = Math.max(0, 1 - (currentX / 150));
+            e.preventDefault();
+        }
+        
+        function handleEnd(e) {
+            if (!isDragging) return;
+            isDragging = false;
+            swipeHandle.style.transition = 'transform 0.3s ease';
+            
+            if (currentX >= THRESHOLD) {
+                swipeHandle.style.transform = `translateX(200px)`;
+                setTimeout(showLoading, 300);
+            } else {
+                resetSwipe();
+            }
+        }
+        
+        swipeHandle.addEventListener('touchstart', handleStart, {passive: false});
+        swipeHandle.addEventListener('mousedown', handleStart);
+        
+        document.addEventListener('touchmove', handleMove, {passive: false});
+        document.addEventListener('mousemove', handleMove);
+        
+        document.addEventListener('touchend', handleEnd);
+        document.addEventListener('mouseup', handleEnd);
+        
+        function showLoading() {
+            modalContent.style.display = 'none';
+            loadingContent.classList.add('active');
+            
+            setTimeout(() => {
+                loadingContent.classList.remove('active');
+                successContent.classList.add('active');
+                createConfetti();
+                
+                setTimeout(() => {
+                    closeModal();
+                    showRetrievedState();
+                }, 2000);
+            }, 800);
+        }
+        
+        function showRetrievedState() {
+            collectBtn.classList.add('hidden');
+            document.getElementById('reminderBtn').classList.add('hidden');
+            
+            const orderCard = document.getElementById('orderCard');
+            orderCard.classList.add('retrieved');
+            orderCard.innerHTML = `
+                <div class="status-banner">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                        <path d="M20 6L9 17l-5-5"/>
+                    </svg>
+                    Récupérée
+                </div>
+                
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                    <div class="store-logo" style="width: 48px; height: 48px; font-size: 8px; margin: 0;">Le P'tit<br>Mitron</div>
+                    <div>
+                        <div style="font-weight: 700; font-size: 16px;">Le P'tit Mitron</div>
+                        <div style="font-size: 13px; color: #666;">144 Rue Saint-Denis, 93100 Montreuil, Fr...</div>
+                    </div>
+                </div>
+                
+                <div class="order-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Récupérée</span>
+                        <span class="detail-value">21 févr. 2026</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">N° de commande</span>
+                        <span class="detail-value" style="font-family: monospace; font-size: 13px;">CYEPD376HE060</span>
+                    </div>
+                </div>
+                
+                <div class="order-item">
+                    <div class="item-info">
+                        <span class="item-label">Panier Surprise</span>
+                        <span class="item-name">1x Panier boulangerie</span>
+                    </div>
+                    <div class="item-info" style="text-align: right;">
+                        <span class="item-label">Total</span>
+                        <span class="item-price">2,49 €</span>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid #F0F0F0;">
+                    <div class="detail-label" style="margin-bottom: 4px;">Moyen de paiement</div>
+                    <div class="detail-value">Credit Card: Mastercard</div>
+                </div>
+            `;
+            
+            const helpSection = document.createElement('div');
+            helpSection.style.cssText = 'text-align: center; margin-top: 24px;';
+            helpSection.innerHTML = `
+                <div style="width: 32px; height: 32px; border: 2px solid #2D5A4A; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; color: #2D5A4A; font-weight: 700;">?</div>
+                <div style="font-size: 14px; color: #666;">Besoin d'aide ?</div>
+            `;
+            document.querySelector('.content').appendChild(helpSection);
+            
+            setTimeout(() => {
+                ratingScreen.classList.add('active');
+            }, 1500);
+        }
+        
+        function createConfetti() {
+            const colors = ['#2D5A4A', '#3D9970', '#5DBB8A', '#7FD4A4', '#A8E6C3'];
+            for (let i = 0; i < 30; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animation = `confetti-fall ${1 + Math.random()}s linear forwards`;
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 2000);
+            }
+        }
+        
+        document.querySelectorAll('.star').forEach(star => {
+            star.addEventListener('click', function() {
+                const rating = parseInt(this.dataset.rating);
+                document.querySelectorAll('.star').forEach((s, index) => {
+                    if (index < rating) s.classList.add('filled');
+                    else s.classList.remove('filled');
+                });
+                setTimeout(() => alert(`Merci pour votre évaluation de ${rating} étoiles !`), 300);
+            });
+        });
+        
+        closeRatingBtn.addEventListener('click', () => {
+            ratingScreen.classList.remove('active');
+        });
+        
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+        
+        modalOverlay.style.display = 'none';
+        bottomSheet.style.display = 'none';
+    </script>
+</body>
+</html>
