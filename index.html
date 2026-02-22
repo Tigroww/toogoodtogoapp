@@ -23,9 +23,9 @@
         }
         
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #F5F5F5;
-            color: #1A1A1A;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', sans-serif;
+            background: #F5F5F0;
+            color: #1C1C1E;
             position: fixed;
             width: 100%;
             top: 0;
@@ -35,7 +35,7 @@
         .app-container {
             max-width: 430px;
             margin: 0 auto;
-            background: #F5F5F5;
+            background: #F5F5F0;
             height: 100vh;
             height: 100dvh;
             overflow-y: auto;
@@ -44,8 +44,9 @@
             -webkit-overflow-scrolling: touch;
         }
         
+        /* Header */
         .header {
-            background: #F5F5F5;
+            background: #F5F5F0;
             padding: 50px 16px 12px;
             display: flex;
             align-items: center;
@@ -68,6 +69,11 @@
         .back-btn svg {
             width: 24px;
             height: 24px;
+            stroke: #1C1C1E;
+            stroke-width: 2.5;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
         
         .header-title {
@@ -76,12 +82,15 @@
             flex: 1;
             text-align: center;
             margin-right: 40px;
+            color: #1C1C1E;
         }
         
+        /* Content */
         .content {
             padding: 0 16px 24px;
         }
         
+        /* Store Card */
         .store-card {
             background: white;
             border-radius: 16px;
@@ -96,7 +105,7 @@
             height: 64px;
             border-radius: 50%;
             margin: 0 auto 12px;
-            background: linear-gradient(135deg, #2D5A4A 0%, #1A3D2F 100%);
+            background: linear-gradient(135deg, #1A5F5A 0%, #0D3D3A 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -105,18 +114,26 @@
             font-weight: 700;
             text-align: center;
             line-height: 1.2;
-            box-shadow: 0 2px 8px rgba(45, 90, 74, 0.2);
+            box-shadow: 0 2px 8px rgba(26, 95, 90, 0.25);
+            overflow: hidden;
+        }
+        
+        .store-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         
         .store-name {
             font-size: 20px;
             font-weight: 700;
             margin-bottom: 4px;
+            color: #1C1C1E;
         }
         
         .store-address {
             font-size: 13px;
-            color: #666;
+            color: #8E8E93;
             margin-bottom: 16px;
             line-height: 1.4;
         }
@@ -125,42 +142,53 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            color: #2D5A4A;
+            color: #1A5F5A;
             font-size: 14px;
             font-weight: 600;
             text-decoration: none;
             padding: 8px 16px;
             border-radius: 20px;
-            background: rgba(45, 90, 74, 0.08);
+            background: rgba(26, 95, 90, 0.08);
         }
         
+        .find-store-btn svg {
+            width: 16px;
+            height: 16px;
+            stroke: #1A5F5A;
+            stroke-width: 2;
+            fill: none;
+        }
+        
+        /* Order Card */
         .order-card {
             background: white;
             border-radius: 16px;
-            padding: 20px;
+            padding: 0;
             margin-bottom: 12px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            overflow: hidden;
         }
         
+        /* Tabs */
         .tabs {
             display: flex;
-            border-bottom: 1px solid #E5E5E5;
-            margin-bottom: 20px;
+            border-bottom: 1px solid #E5E5EA;
         }
         
         .tab {
             flex: 1;
-            padding: 12px 0;
+            padding: 16px 8px;
             text-align: center;
             font-size: 14px;
             font-weight: 500;
-            color: #999;
+            color: #8E8E93;
             position: relative;
             cursor: pointer;
+            line-height: 1.3;
         }
         
         .tab.active {
-            color: #2D5A4A;
+            color: #1A5F5A;
             font-weight: 600;
         }
         
@@ -168,13 +196,18 @@
             content: '';
             position: absolute;
             bottom: 0;
-            left: 20%;
-            right: 20%;
-n            height: 2px;
-            background: #2D5A4A;
+            left: 15%;
+            right: 15%;
+            height: 3px;
+            background: #1A5F5A;
             border-radius: 2px 2px 0 0;
         }
         
+        .tab-content {
+            padding: 20px;
+        }
+        
+        /* Order Details Grid */
         .order-details {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -191,7 +224,7 @@ n            height: 2px;
         .detail-label {
             font-size: 11px;
             font-weight: 600;
-            color: #999;
+            color: #8E8E93;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
@@ -199,15 +232,16 @@ n            height: 2px;
         .detail-value {
             font-size: 15px;
             font-weight: 500;
-            color: #1A1A1A;
+            color: #1C1C1E;
         }
         
+        /* Order Item */
         .order-item {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             padding: 12px 0;
-            border-top: 1px solid #F0F0F0;
+            border-top: 1px solid #F2F2F7;
         }
         
         .item-info {
@@ -219,7 +253,7 @@ n            height: 2px;
         .item-label {
             font-size: 11px;
             font-weight: 600;
-            color: #999;
+            color: #8E8E93;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
@@ -227,26 +261,27 @@ n            height: 2px;
         .item-name {
             font-size: 15px;
             font-weight: 500;
-            color: #1A1A1A;
+            color: #1C1C1E;
         }
         
         .item-price {
             font-size: 15px;
             font-weight: 600;
-            color: #1A1A1A;
+            color: #1C1C1E;
         }
         
+        /* Packaging Info */
         .packaging-info {
             margin-top: 16px;
             padding: 16px;
-            background: #F9F9F9;
+            background: #F9F9FB;
             border-radius: 12px;
         }
         
         .packaging-label {
             font-size: 11px;
             font-weight: 600;
-            color: #999;
+            color: #8E8E93;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 6px;
@@ -254,22 +289,23 @@ n            height: 2px;
         
         .packaging-text {
             font-size: 13px;
-            color: #666;
+            color: #636366;
             line-height: 1.5;
         }
         
+        /* Action Button */
         .action-btn {
             width: 100%;
             padding: 16px;
-            background: #2D5A4A;
+            background: #1A5F5A;
             color: white;
             border: none;
             border-radius: 28px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            margin-bottom: 16px;
-            box-shadow: 0 4px 12px rgba(45, 90, 74, 0.25);
+            margin: 20px 0 16px;
+            box-shadow: 0 4px 12px rgba(26, 95, 90, 0.25);
             -webkit-appearance: none;
             appearance: none;
         }
@@ -279,6 +315,7 @@ n            height: 2px;
             opacity: 0.9;
         }
         
+        /* Reminder Button - Bell on RIGHT */
         .reminder-btn {
             display: flex;
             align-items: center;
@@ -287,7 +324,7 @@ n            height: 2px;
             width: 100%;
             padding: 12px;
             background: transparent;
-            color: #2D5A4A;
+            color: #1A5F5A;
             border: none;
             font-size: 14px;
             font-weight: 500;
@@ -296,15 +333,34 @@ n            height: 2px;
             appearance: none;
         }
         
+        .reminder-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke: #1A5F5A;
+            stroke-width: 2;
+            fill: none;
+            order: 2;
+        }
+        
+        /* Bottom Text */
+        .bottom-text {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 13px;
+            color: #1A5F5A;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Modal Overlay */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
+            background: rgba(0,0,0,0.4);
             z-index: 1000;
             opacity: 0;
             visibility: hidden;
@@ -316,6 +372,7 @@ n            height: 2px;
             visibility: visible;
         }
         
+        /* Bottom Sheet */
         .bottom-sheet {
             position: fixed;
             bottom: 0;
@@ -329,7 +386,7 @@ n            height: 2px;
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             max-width: 430px;
             margin: 0 auto;
-            max-height: 90vh;
+            max-height: 85vh;
             overflow-y: auto;
         }
         
@@ -337,141 +394,179 @@ n            height: 2px;
             transform: translateY(0);
         }
         
+        /* Modal Header */
         .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 24px;
+            position: relative;
         }
         
         .modal-title {
-            font-size: 18px;
+            font-size: 19px;
             font-weight: 700;
-            color: #1A1A1A;
+            color: #1C1C1E;
+            flex: 1;
+            text-align: center;
         }
         
         .close-btn {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
             width: 32px;
             height: 32px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            background: #F5F5F5;
+            background: transparent;
             cursor: pointer;
             border: none;
             -webkit-appearance: none;
+            padding: 0;
         }
         
+        .close-btn svg {
+            width: 24px;
+            height: 24px;
+            stroke: #1C1C1E;
+            stroke-width: 2.5;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        
+        /* Modal Content */
         .modal-content {
             text-align: center;
         }
         
         .quantity-badge {
-            width: 48px;
-            height: 48px;
-            background: #2D5A4A;
+            width: 56px;
+            height: 56px;
+            background: #1A5F5A;
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 700;
             margin: 0 auto 16px;
         }
         
         .modal-item-name {
             font-size: 18px;
-            font-weight: 600;
-            color: #1A1A1A;
+            font-weight: 700;
+            color: #1C1C1E;
             margin-bottom: 4px;
         }
         
         .modal-store-name {
-            font-size: 14px;
-            color: #666;
+            font-size: 15px;
+            color: #636366;
             margin-bottom: 16px;
         }
         
         .order-code {
             display: inline-block;
-            background: #2D5A4A;
+            background: #1A5F5A;
             color: white;
             padding: 10px 24px;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 17px;
             font-weight: 700;
             letter-spacing: 1px;
             margin-bottom: 20px;
-            font-family: 'Courier New', monospace;
+            font-family: 'SF Mono', 'Courier New', monospace;
         }
         
         .modal-divider {
             height: 1px;
-            background: #E5E5E5;
-            margin: 20px 0;
+            background: #E5E5EA;
+            margin: 20px -24px;
         }
         
         .modal-instruction {
-            font-size: 13px;
-            color: #666;
+            font-size: 14px;
+            color: #636366;
             line-height: 1.5;
             margin-bottom: 24px;
             padding: 0 8px;
         }
         
-        .swipe-wrapper {
+        /* SLIDER - White with green border, fill effect */
+        .slider-container {
             position: relative;
             height: 56px;
-            margin: 0 auto;
-        }
-        
-        .swipe-container {
-            position: relative;
-            height: 56px;
-            background: #E8F5F0;
+            background: white;
+            border: 2px solid #1A5F5A;
             border-radius: 28px;
             overflow: hidden;
         }
         
-        .swipe-bg {
+        .slider-fill {
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #2D5A4A;
-            font-size: 15px;
-            font-weight: 600;
+            height: 100%;
+            background: #1A5F5A;
+            width: 0;
+            transition: width 0.05s linear;
         }
         
-        .swipe-handle {
+        .slider-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 15px;
+            font-weight: 600;
+            color: #1A5F5A;
+            white-space: nowrap;
+            z-index: 5;
+            transition: color 0.2s;
+        }
+        
+        .slider-text.white {
+            color: white;
+        }
+        
+        .slider-handle {
             position: absolute;
             top: 4px;
             left: 4px;
-            width: 48px;
-            height: 48px;
-            background: #2D5A4A;
+            width: 44px;
+            height: 44px;
+            background: #1A5F5A;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            cursor: grab;
             z-index: 10;
-            cursor: pointer;
+            touch-action: none;
+            transition: transform 0.05s linear;
         }
         
-        .swipe-handle svg {
-            width: 24px;
-            height: 24px;
-            color: white;
-            pointer-events: none;
+        .slider-handle:active {
+            cursor: grabbing;
         }
         
+        .slider-handle svg {
+            width: 22px;
+            height: 22px;
+            stroke: white;
+            stroke-width: 3;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        
+        /* Success State */
         .success-content {
             display: none;
             text-align: center;
@@ -484,21 +579,25 @@ n            height: 2px;
         }
         
         .checkmark-circle {
-            width: 72px;
-            height: 72px;
-            background: #2D5A4A;
+            width: 64px;
+            height: 64px;
+            background: #1A5F5A;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 20px;
+            margin: 0 auto 16px;
             animation: scaleIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
         .checkmark-circle svg {
-            width: 36px;
-            height: 36px;
-            color: white;
+            width: 32px;
+            height: 32px;
+            stroke: white;
+            stroke-width: 3;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
         
         @keyframes scaleIn {
@@ -512,101 +611,47 @@ n            height: 2px;
         }
         
         .success-title {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 700;
-            color: #2D5A4A;
+            color: #1A5F5A;
             margin-bottom: 8px;
         }
         
         .success-text {
             font-size: 14px;
-            color: #666;
+            color: #636366;
             line-height: 1.5;
         }
         
+        /* Loading Spinner */
         .spinner {
             width: 48px;
             height: 48px;
-            border: 3px solid #E5E5E5;
-            border-top-color: #2D5A4A;
+            border: 3px solid #E5E5EA;
+            border-top-color: #1A5F5A;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
-            margin: 20px auto;
+            margin: 30px auto;
         }
         
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
         
-        .rating-screen {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: #F5F5F5;
-            z-index: 2000;
-            overflow-y: auto;
-            max-width: 430px;
-            margin: 0 auto;
-        }
-        
-        .rating-screen.active {
-            display: block;
-        }
-        
-        .rating-card {
-            background: #3D9970;
-            margin: 70px 16px 16px;
+        /* RETRIEVED STATE CARD - Exact match */
+        .retrieved-card {
+            background: white;
             border-radius: 16px;
-            padding: 24px;
-            text-align: center;
-            color: white;
-        }
-        
-        .rating-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            line-height: 1.4;
-        }
-        
-        .stars {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-        }
-        
-        .star {
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-        }
-        
-        .star svg {
-            width: 100%;
-            height: 100%;
-            fill: none;
-            stroke: white;
-            stroke-width: 2;
-            transition: fill 0.2s;
-        }
-        
-        .star.filled svg {
-            fill: white;
-        }
-        
-        .order-card.retrieved {
-            border: 2px solid #2D5A4A;
+            overflow: hidden;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            border: 3px solid #1A5F5A;
         }
         
         .status-banner {
-            background: #2D5A4A;
+            background: #1A5F5A;
             color: white;
             padding: 12px;
-            margin: -20px -20px 16px -20px;
-            border-radius: 14px 14px 0 0;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -615,120 +660,261 @@ n            height: 2px;
             font-size: 14px;
         }
         
+        .status-banner svg {
+            width: 18px;
+            height: 18px;
+            stroke: white;
+            stroke-width: 3;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        
+        .retrieved-content {
+            padding: 16px 20px 20px;
+        }
+        
+        .store-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        
+        .store-row .store-logo {
+            width: 48px;
+            height: 48px;
+            font-size: 8px;
+            margin: 0;
+            flex-shrink: 0;
+        }
+        
+        .store-row .store-name-small {
+            font-weight: 700;
+            font-size: 16px;
+            color: #1C1C1E;
+        }
+        
+        .store-row .store-address-small {
+            font-size: 13px;
+            color: #636366;
+        }
+        
+        /* Help Section */
+        .help-section {
+            text-align: center;
+            margin-top: 24px;
+        }
+        
+        .help-icon {
+            width: 32px;
+            height: 32px;
+            border: 2px solid #1A5F5A;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+            color: #1A5F5A;
+            font-weight: 700;
+            font-size: 16px;
+        }
+        
+        .help-text {
+            font-size: 14px;
+            color: #636366;
+        }
+        
+        /* Hidden */
         .hidden {
             display: none !important;
         }
         
-        .confetti {
-            position: fixed;
-            width: 10px;
-            height: 10px;
-            pointer-events: none;
-            z-index: 3000;
+        /* Loading content */
+        .loading-content {
+            display: none;
+            padding: 20px 0;
         }
         
-        @keyframes confetti-fall {
-            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        .loading-content.active {
+            display: block;
         }
     </style>
+<base target="_blank">
 </head>
 <body>
     <div class="app-container">
+        <!-- Header -->
         <div class="header">
-            <div class="back-btn">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <div class="back-btn" onclick="goBack()">
+                <svg viewBox="0 0 24 24">
                     <path d="M15 18l-6-6 6-6"/>
                 </svg>
             </div>
             <h1 class="header-title">Votre commande</h1>
         </div>
         
-        <div class="content">
-            <div class="store-card">
-                <div class="store-logo">Le P'tit<br>Mitron</div>
-                <h2 class="store-name">Le P'tit Mitron</h2>
-                <p class="store-address">144 Rue Saint-Denis, 93100 Montreuil, France</p>
+        <div class="content" id="mainContent">
+            <!-- Store Card - DISAPPEARS when retrieved -->
+            <div class="store-card" id="storeCard">
+                <div class="store-logo">
+                    <span id="storeLogoText">Le P'tit<br>Mitron</span>
+                </div>
+                <h2 class="store-name" id="storeName">Le P'tit Mitron</h2>
+                <p class="store-address" id="storeAddress">144 Rue Saint-Denis, 93100 Montreuil, France</p>
                 <a href="#" class="find-store-btn">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    Trouver le commerce
+                    <svg viewBox="0 0 24 24">
                         <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
                         <circle cx="12" cy="10" r="3"/>
                     </svg>
-                    Trouver le commerce
                 </a>
             </div>
             
+            <!-- Order Card (Initial State) - DISAPPEARS when retrieved -->
             <div class="order-card" id="orderCard">
                 <div class="tabs">
-                    <div class="tab active">Je récupère<br>la commande</div>
-                    <div class="tab">Demander à<br>un ami</div>
+                    <div class="tab active" onclick="switchTab(this, 'collect')">Je récupère<br>la commande</div>
+                    <div class="tab" onclick="switchTab(this, 'friend')">Demander à<br>un ami</div>
                 </div>
                 
-                <div class="order-details">
-                    <div class="detail-item">
-                        <span class="detail-label">Date</span>
-                        <span class="detail-value">21 févr. 2026</span>
+                <div class="tab-content" id="collectTab">
+                    <div class="order-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Date</span>
+                            <span class="detail-value" id="orderDate">21 févr. 2026</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Heure de collecte</span>
+                            <span class="detail-value" id="collectTime">19:00 - 21:00</span>
+                        </div>
                     </div>
-                    <div class="detail-item">
-                        <span class="detail-label">Heure de collecte</span>
-                        <span class="detail-value">19:00 - 21:00</span>
+                    
+                    <div class="order-item">
+                        <div class="item-info">
+                            <span class="item-label">Panier Surprise</span>
+                            <span class="item-name" id="itemName">1x Panier boulangerie</span>
+                        </div>
+                        <div class="item-info" style="text-align: right;">
+                            <span class="item-label">Total</span>
+                            <span class="item-price" id="itemPrice">2,49 €</span>
+                        </div>
                     </div>
+                    
+                    <div class="packaging-info">
+                        <div class="packaging-label">Emballage</div>
+                        <div class="packaging-text" id="packagingText">
+                            Le commerçant fournira l'emballage, mais nous vous encourageons à apporter votre propre sac pour ramener le panier chez vous.
+                        </div>
+                    </div>
+                    
+                    <button class="action-btn" id="collectBtn" onclick="openModal()">
+                        Cliquer pour récupérer
+                    </button>
+                    
+                    <button class="reminder-btn">
+                        Recevoir un rappel
+                        <svg viewBox="0 0 24 24">
+                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                        </svg>
+                    </button>
                 </div>
                 
-                <div class="order-item">
-                    <div class="item-info">
-                        <span class="item-label">Panier Surprise</span>
-                        <span class="item-name">1x Panier boulangerie</span>
-                    </div>
-                    <div class="item-info" style="text-align: right;">
-                        <span class="item-label">Total</span>
-                        <span class="item-price">2,49 €</span>
-                    </div>
-                </div>
-                
-                <div class="packaging-info">
-                    <div class="packaging-label">Emballage</div>
-                    <div class="packaging-text">
-                        Le commerçant fournira l'emballage, mais nous vous encourageons à apporter votre propre sac pour ramener le panier chez vous.
+                <div class="tab-content hidden" id="friendTab">
+                    <div style="text-align: center; padding: 40px 20px;">
+                        <div style="width: 80px; height: 80px; background: #F5F5F0; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#8E8E93" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </div>
+                        <p style="font-size: 16px; font-weight: 600; color: #1C1C1E; margin-bottom: 8px;">Partager la commande</p>
+                        <p style="font-size: 14px; color: #636366;">Envoyez cette commande à un ami pour qu'il puisse la récupérer à votre place.</p>
                     </div>
                 </div>
             </div>
             
-            <button class="action-btn" id="collectBtn">
-                Cliquer pour récupérer
-            </button>
+            <div class="bottom-text" id="bottomText">Sur votre chemin !</div>
             
-            <button class="reminder-btn" id="reminderBtn">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
-                    <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
-                </svg>
-                Recevoir un rappel
-            </button>
+            <!-- Retrieved Card - APPEARS when retrieved (initially hidden) -->
+            <div class="retrieved-card hidden" id="retrievedCard">
+                <div class="status-banner">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20 6L9 17l-5-5"/>
+                    </svg>
+                    Récupérée
+                </div>
+                <div class="retrieved-content">
+                    <div class="store-row">
+                        <div class="store-logo" style="width: 48px; height: 48px; font-size: 8px;">
+                            <span id="retrievedLogoText">Le P'tit<br>Mitron</span>
+                        </div>
+                        <div>
+                            <div class="store-name-small" id="retrievedStoreName">Le P'tit Mitron</div>
+                            <div class="store-address-small" id="retrievedStoreAddress">144 Rue Saint-Denis, 93100 Montreuil, Fr...</div>
+                        </div>
+                    </div>
+                    
+                    <div class="order-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Récupérée</span>
+                            <span class="detail-value" id="retrievedDate">21 févr. 2026</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">N° de commande</span>
+                            <span class="detail-value" style="font-family: monospace; font-size: 13px;" id="retrievedOrderCode">CYEPD376HE060</span>
+                        </div>
+                    </div>
+                    
+                    <div class="order-item">
+                        <div class="item-info">
+                            <span class="item-label">Panier Surprise</span>
+                            <span class="item-name" id="retrievedItemName">1x Panier boulangerie</span>
+                        </div>
+                        <div class="item-info" style="text-align: right;">
+                            <span class="item-label">Total</span>
+                            <span class="item-price" id="retrievedItemPrice">2,49 €</span>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid #F2F2F7;">
+                        <div class="detail-label" style="margin-bottom: 4px;">Moyen de paiement</div>
+                        <div class="detail-value" id="retrievedPayment">Credit Card: Mastercard</div>
+                    </div>
+                </div>
+            </div>
             
-            <div style="text-align: center; margin-top: 24px; font-size: 13px; color: #2D5A4A; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">
-                Sur votre chemin !
+            <!-- Help Section - APPEARS when retrieved (initially hidden) -->
+            <div class="help-section hidden" id="helpSection">
+                <div class="help-icon">?</div>
+                <div class="help-text">Besoin d'aide ?</div>
             </div>
         </div>
     </div>
     
-    <div class="modal-overlay" id="modalOverlay"></div>
+    <!-- Modal Overlay -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
     
+    <!-- Bottom Sheet Modal -->
     <div class="bottom-sheet" id="bottomSheet">
         <div class="modal-header">
             <h3 class="modal-title">Commande à récupérer</h3>
-            <button class="close-btn" id="closeModalBtn">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <button class="close-btn" onclick="closeModal()">
+                <svg viewBox="0 0 24 24">
                     <path d="M18 6L6 18M6 6l12 12"/>
                 </svg>
             </button>
         </div>
         
-        <div class="modal-content" id="modalContent">
-            <div class="quantity-badge">1x</div>
-            <div class="modal-item-name">Panier boulangerie</div>
-            <div class="modal-store-name">Le P'tit Mitron</div>
-            <div class="order-code">CYEPD376HE060</div>
+        <!-- Initial Content -->
+        <div class="modal-content" id="modalInitial">
+            <div class="quantity-badge" id="modalQuantity">1x</div>
+            <div class="modal-item-name" id="modalItemName">Panier boulangerie</div>
+            <div class="modal-store-name" id="modalStoreName">Le P'tit Mitron</div>
+            <div class="order-code" id="modalOrderCode">CYEPD376HE060</div>
             
             <div class="modal-divider"></div>
             
@@ -736,21 +922,27 @@ n            height: 2px;
                 Validez ci-dessous et montrez l'écran au commerçant. Assurez-vous de ne confirmer qu'une fois que vous êtes chez le commerçant pour récupérer votre panier.
             </div>
             
-            <div class="swipe-wrapper" id="swipeWrapper">
-                <div class="swipe-container" id="swipeContainer">
-                    <div class="swipe-bg" id="swipeText">Glisser pour valider →</div>
-                    <div class="swipe-handle" id="swipeHandle">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-                            <path d="M9 18l6-6-6-6"/>
-                        </svg>
-                    </div>
+            <!-- Slider -->
+            <div class="slider-container" id="sliderContainer">
+                <div class="slider-fill" id="sliderFill"></div>
+                <span class="slider-text" id="sliderText">Valider pour récupérer</span>
+                <div class="slider-handle" id="sliderHandle">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
                 </div>
             </div>
         </div>
         
-        <div class="success-content" id="successContent">
+        <!-- Loading State -->
+        <div class="loading-content" id="loadingState">
+            <div class="spinner"></div>
+        </div>
+        
+        <!-- Success State -->
+        <div class="success-content" id="successState">
             <div class="checkmark-circle">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                <svg viewBox="0 0 24 24">
                     <path d="M20 6L9 17l-5-5"/>
                 </svg>
             </div>
@@ -759,316 +951,236 @@ n            height: 2px;
                 Montrez l'écran au commerçant pour<br>récupérer votre panier !
             </div>
         </div>
-        
-        <div class="success-content" id="loadingContent">
-            <div class="spinner"></div>
-        </div>
-    </div>
-    
-    <div class="rating-screen" id="ratingScreen">
-        <div class="header" style="padding-top: 50px;">
-            <div class="back-btn" id="closeRatingBtn">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M15 18l-6-6 6-6"/>
-                </svg>
-            </div>
-            <h1 class="header-title">Votre commande</h1>
-        </div>
-        
-        <div style="padding: 0 16px;">
-            <div class="rating-card">
-                <div class="rating-title">Comment s'est passée votre expérience globale ?</div>
-                <div class="stars">
-                    <div class="star" data-rating="1">
-                        <svg viewBox="0 0 24 24">
-                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                        </svg>
-                    </div>
-                    <div class="star" data-rating="2">
-                        <svg viewBox="0 0 24 24">
-                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                        </svg>
-                    </div>
-                    <div class="star" data-rating="3">
-                        <svg viewBox="0 0 24 24">
-                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                        </svg>
-                    </div>
-                    <div class="star" data-rating="4">
-                        <svg viewBox="0 0 24 24">
-                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                        </svg>
-                    </div>
-                    <div class="star" data-rating="5">
-                        <svg viewBox="0 0 24 24">
-                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="order-card retrieved">
-                <div class="status-banner">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-                        <path d="M20 6L9 17l-5-5"/>
-                    </svg>
-                    Récupérée
-                </div>
-                
-                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
-                    <div class="store-logo" style="width: 48px; height: 48px; font-size: 8px; margin: 0;">Le P'tit<br>Mitron</div>
-                    <div>
-                        <div style="font-weight: 700; font-size: 16px;">Le P'tit Mitron</div>
-                        <div style="font-size: 13px; color: #666;">144 Rue Saint-Denis, 93100 Montreuil, Fr...</div>
-                    </div>
-                </div>
-                
-                <div class="order-details">
-                    <div class="detail-item">
-                        <span class="detail-label">Récupérée</span>
-                        <span class="detail-value">21 févr. 2026</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">N° de commande</span>
-                        <span class="detail-value" style="font-family: monospace; font-size: 13px;">CYEPD376HE060</span>
-                    </div>
-                </div>
-                
-                <div class="order-item">
-                    <div class="item-info">
-                        <span class="item-label">Panier Surprise</span>
-                        <span class="item-name">1x Panier boulangerie</span>
-                    </div>
-                    <div class="item-info" style="text-align: right;">
-                        <span class="item-label">Total</span>
-                        <span class="item-price">2,49 €</span>
-                    </div>
-                </div>
-                
-                <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid #F0F0F0;">
-                    <div class="detail-label" style="margin-bottom: 4px;">Moyen de paiement</div>
-                    <div class="detail-value">Credit Card: Mastercard</div>
-                </div>
-            </div>
-            
-            <div style="text-align: center; margin-top: 24px;">
-                <div style="width: 32px; height: 32px; border: 2px solid #2D5A4A; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; color: #2D5A4A; font-weight: 700;">?</div>
-                <div style="font-size: 14px; color: #666;">Besoin d'aide ?</div>
-            </div>
-        </div>
     </div>
 
     <script>
-        const collectBtn = document.getElementById('collectBtn');
-        const modalOverlay = document.getElementById('modalOverlay');
-        const bottomSheet = document.getElementById('bottomSheet');
-        const closeModalBtn = document.getElementById('closeModalBtn');
-        const swipeHandle = document.getElementById('swipeHandle');
-        const swipeText = document.getElementById('swipeText');
-        const modalContent = document.getElementById('modalContent');
-        const successContent = document.getElementById('successContent');
-        const loadingContent = document.getElementById('loadingContent');
-        const ratingScreen = document.getElementById('ratingScreen');
-        const closeRatingBtn = document.getElementById('closeRatingBtn');
+        // ============================================
+        // CONFIGURATION - MODIFIE CES VALEURS
+        // ============================================
+        const ORDER_CONFIG = {
+            // Infos du magasin
+            storeName: "Le P'tit Mitron",
+            storeAddress: "144 Rue Saint-Denis, 93100 Montreuil, France",
+            storeAddressShort: "144 Rue Saint-Denis, 93100 Montreuil, Fr...",
+            storeLogoText: "Le P'tit<br>Mitron",
+            
+            // Infos de la commande
+            orderDate: "21 févr. 2026",
+            collectTime: "19:00 - 21:00",
+            orderCode: "CYEPD376HE060",
+            
+            // Infos du panier
+            itemName: "1x Panier boulangerie",
+            itemPrice: "2,49 €",
+            quantity: "1x",
+            itemType: "Panier boulangerie",
+            
+            // Paiement
+            paymentMethod: "Credit Card: Mastercard",
+            
+            // Emballage
+            packagingText: "Le commerçant fournira l'emballage, mais nous vous encourageons à apporter votre propre sac pour ramener le panier chez vous."
+        };
         
-        let isDragging = false;
-        let startX = 0;
-        let currentX = 0;
-        const THRESHOLD = 150;
+        // ============================================
+        // INITIALISATION
+        // ============================================
+        function initOrderData() {
+            // Store card
+            document.getElementById('storeLogoText').innerHTML = ORDER_CONFIG.storeLogoText;
+            document.getElementById('storeName').textContent = ORDER_CONFIG.storeName;
+            document.getElementById('storeAddress').textContent = ORDER_CONFIG.storeAddress;
+            
+            // Order card
+            document.getElementById('orderDate').textContent = ORDER_CONFIG.orderDate;
+            document.getElementById('collectTime').textContent = ORDER_CONFIG.collectTime;
+            document.getElementById('itemName').textContent = ORDER_CONFIG.itemName;
+            document.getElementById('itemPrice').textContent = ORDER_CONFIG.itemPrice;
+            document.getElementById('packagingText').textContent = ORDER_CONFIG.packagingText;
+            
+            // Modal
+            document.getElementById('modalQuantity').textContent = ORDER_CONFIG.quantity;
+            document.getElementById('modalItemName').textContent = ORDER_CONFIG.itemType;
+            document.getElementById('modalStoreName').textContent = ORDER_CONFIG.storeName;
+            document.getElementById('modalOrderCode').textContent = ORDER_CONFIG.orderCode;
+            
+            // Retrieved card (hidden initially)
+            document.getElementById('retrievedLogoText').innerHTML = ORDER_CONFIG.storeLogoText;
+            document.getElementById('retrievedStoreName').textContent = ORDER_CONFIG.storeName;
+            document.getElementById('retrievedStoreAddress').textContent = ORDER_CONFIG.storeAddressShort;
+            document.getElementById('retrievedDate').textContent = ORDER_CONFIG.orderDate;
+            document.getElementById('retrievedOrderCode').textContent = ORDER_CONFIG.orderCode;
+            document.getElementById('retrievedItemName').textContent = ORDER_CONFIG.itemName;
+            document.getElementById('retrievedItemPrice').textContent = ORDER_CONFIG.itemPrice;
+            document.getElementById('retrievedPayment').textContent = ORDER_CONFIG.paymentMethod;
+        }
         
+        // Initialize on load
+        initOrderData();
+        
+        // ============================================
+        // TAB SWITCHING
+        // ============================================
+        function switchTab(tab, type) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            
+            if (type === 'collect') {
+                document.getElementById('collectTab').classList.remove('hidden');
+                document.getElementById('friendTab').classList.add('hidden');
+            } else {
+                document.getElementById('collectTab').classList.add('hidden');
+                document.getElementById('friendTab').classList.remove('hidden');
+            }
+        }
+        
+        // ============================================
+        // MODAL FUNCTIONS
+        // ============================================
         function openModal() {
-            modalOverlay.style.display = 'block';
-            bottomSheet.style.display = 'block';
-            setTimeout(() => {
-                modalOverlay.classList.add('active');
-                bottomSheet.classList.add('active');
-            }, 10);
+            document.getElementById('modalOverlay').classList.add('active');
+            document.getElementById('bottomSheet').classList.add('active');
+            resetSlider();
         }
         
         function closeModal() {
-            modalOverlay.classList.remove('active');
-            bottomSheet.classList.remove('active');
+            document.getElementById('modalOverlay').classList.remove('active');
+            document.getElementById('bottomSheet').classList.remove('active');
             setTimeout(() => {
-                modalOverlay.style.display = 'none';
-                bottomSheet.style.display = 'none';
                 resetModal();
             }, 300);
         }
         
         function resetModal() {
-            modalContent.style.display = 'block';
-            successContent.classList.remove('active');
-            loadingContent.classList.remove('active');
-            resetSwipe();
+            document.getElementById('modalInitial').style.display = 'block';
+            document.getElementById('loadingState').classList.remove('active');
+            document.getElementById('successState').classList.remove('active');
+            resetSlider();
         }
         
-        collectBtn.addEventListener('click', openModal);
-        closeModalBtn.addEventListener('click', closeModal);
-        modalOverlay.addEventListener('click', closeModal);
-        
-        function resetSwipe() {
-            currentX = 0;
-            swipeHandle.style.transform = 'translateX(0px)';
-            swipeHandle.style.transition = 'none';
-            swipeText.style.opacity = 1;
+        function resetSlider() {
+            const handle = document.getElementById('sliderHandle');
+            const fill = document.getElementById('sliderFill');
+            const text = document.getElementById('sliderText');
+            
+            handle.style.transform = 'translateX(0)';
+            fill.style.width = '0';
+            text.classList.remove('white');
         }
         
-        function handleStart(e) {
+        function goBack() {
+            alert('Retour');
+        }
+        
+        // ============================================
+        // SLIDER FUNCTIONALITY
+        // ============================================
+        const sliderHandle = document.getElementById('sliderHandle');
+        const sliderFill = document.getElementById('sliderFill');
+        const sliderText = document.getElementById('sliderText');
+        
+        let isDragging = false;
+        let startX = 0;
+        let currentX = 0;
+        
+        function getMaxDrag() {
+            const container = document.getElementById('sliderContainer');
+            return container.offsetWidth - 52;
+        }
+        
+        // Mouse events
+        sliderHandle.addEventListener('mousedown', startDrag);
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('mouseup', endDrag);
+        
+        // Touch events
+        sliderHandle.addEventListener('touchstart', startDrag, { passive: false });
+        document.addEventListener('touchmove', drag, { passive: false });
+        document.addEventListener('touchend', endDrag);
+        
+        function startDrag(e) {
             isDragging = true;
-            startX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
-            swipeHandle.style.transition = 'none';
+            startX = getClientX(e);
+            sliderHandle.style.transition = 'none';
+            sliderFill.style.transition = 'none';
             e.preventDefault();
         }
         
-        function handleMove(e) {
+        function drag(e) {
             if (!isDragging) return;
-            const x = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
-            const diff = x - startX;
-            currentX = Math.max(0, Math.min(diff, 200));
-            swipeHandle.style.transform = `translateX(${currentX}px)`;
-            swipeText.style.opacity = Math.max(0, 1 - (currentX / 150));
             e.preventDefault();
+            
+            const x = getClientX(e);
+            const diff = x - startX;
+            const maxDrag = getMaxDrag();
+            currentX = Math.max(0, Math.min(diff, maxDrag));
+            
+            const progress = (currentX / maxDrag) * 100;
+            
+            sliderHandle.style.transform = `translateX(${currentX}px)`;
+            sliderFill.style.width = `calc(${currentX}px + 28px)`;
+            
+            if (progress > 50) {
+                sliderText.classList.add('white');
+            } else {
+                sliderText.classList.remove('white');
+            }
         }
         
-        function handleEnd(e) {
+        function endDrag() {
             if (!isDragging) return;
             isDragging = false;
-            swipeHandle.style.transition = 'transform 0.3s ease';
             
-            if (currentX >= THRESHOLD) {
-                swipeHandle.style.transform = `translateX(200px)`;
-                setTimeout(showLoading, 300);
+            sliderHandle.style.transition = 'transform 0.3s ease';
+            sliderFill.style.transition = 'width 0.3s ease';
+            
+            const maxDrag = getMaxDrag();
+            const threshold = maxDrag * 0.85;
+            
+            if (currentX >= threshold) {
+                sliderHandle.style.transform = `translateX(${maxDrag}px)`;
+                sliderFill.style.width = '100%';
+                sliderText.classList.add('white');
+                setTimeout(showLoading, 200);
             } else {
-                resetSwipe();
+                resetSlider();
             }
         }
         
-        swipeHandle.addEventListener('touchstart', handleStart, {passive: false});
-        swipeHandle.addEventListener('mousedown', handleStart);
-        
-        document.addEventListener('touchmove', handleMove, {passive: false});
-        document.addEventListener('mousemove', handleMove);
-        
-        document.addEventListener('touchend', handleEnd);
-        document.addEventListener('mouseup', handleEnd);
+        function getClientX(e) {
+            return e.touches ? e.touches[0].clientX : e.clientX;
+        }
         
         function showLoading() {
-            modalContent.style.display = 'none';
-            loadingContent.classList.add('active');
+            document.getElementById('modalInitial').style.display = 'none';
+            document.getElementById('loadingState').classList.add('active');
             
-            setTimeout(() => {
-                loadingContent.classList.remove('active');
-                successContent.classList.add('active');
-                createConfetti();
-                
-                setTimeout(() => {
-                    closeModal();
-                    showRetrievedState();
-                }, 2000);
-            }, 800);
+            setTimeout(showSuccess, 1500);
         }
         
+        function showSuccess() {
+            document.getElementById('loadingState').classList.remove('active');
+            document.getElementById('successState').classList.add('active');
+            
+            setTimeout(() => {
+                closeModal();
+                showRetrievedState();
+            }, 2000);
+        }
+        
+        // ============================================
+        // SHOW RETRIEVED STATE
+        // ============================================
         function showRetrievedState() {
-            collectBtn.classList.add('hidden');
-            document.getElementById('reminderBtn').classList.add('hidden');
+            // Hide initial cards
+            document.getElementById('storeCard').classList.add('hidden');
+            document.getElementById('orderCard').classList.add('hidden');
+            document.getElementById('bottomText').classList.add('hidden');
             
-            const orderCard = document.getElementById('orderCard');
-            orderCard.classList.add('retrieved');
-            orderCard.innerHTML = `
-                <div class="status-banner">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-                        <path d="M20 6L9 17l-5-5"/>
-                    </svg>
-                    Récupérée
-                </div>
-                
-                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
-                    <div class="store-logo" style="width: 48px; height: 48px; font-size: 8px; margin: 0;">Le P'tit<br>Mitron</div>
-                    <div>
-                        <div style="font-weight: 700; font-size: 16px;">Le P'tit Mitron</div>
-                        <div style="font-size: 13px; color: #666;">144 Rue Saint-Denis, 93100 Montreuil, Fr...</div>
-                    </div>
-                </div>
-                
-                <div class="order-details">
-                    <div class="detail-item">
-                        <span class="detail-label">Récupérée</span>
-                        <span class="detail-value">21 févr. 2026</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">N° de commande</span>
-                        <span class="detail-value" style="font-family: monospace; font-size: 13px;">CYEPD376HE060</span>
-                    </div>
-                </div>
-                
-                <div class="order-item">
-                    <div class="item-info">
-                        <span class="item-label">Panier Surprise</span>
-                        <span class="item-name">1x Panier boulangerie</span>
-                    </div>
-                    <div class="item-info" style="text-align: right;">
-                        <span class="item-label">Total</span>
-                        <span class="item-price">2,49 €</span>
-                    </div>
-                </div>
-                
-                <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid #F0F0F0;">
-                    <div class="detail-label" style="margin-bottom: 4px;">Moyen de paiement</div>
-                    <div class="detail-value">Credit Card: Mastercard</div>
-                </div>
-            `;
-            
-            const helpSection = document.createElement('div');
-            helpSection.style.cssText = 'text-align: center; margin-top: 24px;';
-            helpSection.innerHTML = `
-                <div style="width: 32px; height: 32px; border: 2px solid #2D5A4A; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; color: #2D5A4A; font-weight: 700;">?</div>
-                <div style="font-size: 14px; color: #666;">Besoin d'aide ?</div>
-            `;
-            document.querySelector('.content').appendChild(helpSection);
-            
-            setTimeout(() => {
-                ratingScreen.classList.add('active');
-            }, 1500);
+            // Show retrieved card and help
+            document.getElementById('retrievedCard').classList.remove('hidden');
+            document.getElementById('helpSection').classList.remove('hidden');
         }
-        
-        function createConfetti() {
-            const colors = ['#2D5A4A', '#3D9970', '#5DBB8A', '#7FD4A4', '#A8E6C3'];
-            for (let i = 0; i < 30; i++) {
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                confetti.style.left = Math.random() * 100 + 'vw';
-                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.animation = `confetti-fall ${1 + Math.random()}s linear forwards`;
-                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-                document.body.appendChild(confetti);
-                setTimeout(() => confetti.remove(), 2000);
-            }
-        }
-        
-        document.querySelectorAll('.star').forEach(star => {
-            star.addEventListener('click', function() {
-                const rating = parseInt(this.dataset.rating);
-                document.querySelectorAll('.star').forEach((s, index) => {
-                    if (index < rating) s.classList.add('filled');
-                    else s.classList.remove('filled');
-                });
-                setTimeout(() => alert(`Merci pour votre évaluation de ${rating} étoiles !`), 300);
-            });
-        });
-        
-        closeRatingBtn.addEventListener('click', () => {
-            ratingScreen.classList.remove('active');
-        });
-        
-        document.querySelectorAll('.tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-        
-        modalOverlay.style.display = 'none';
-        bottomSheet.style.display = 'none';
     </script>
 </body>
 </html>
