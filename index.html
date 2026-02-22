@@ -739,8 +739,43 @@
         .loading-content.active {
             display: block;
         }
+        
+        /* Data Loading State */
+        .data-loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 200px;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .data-loading .spinner {
+            margin: 0;
+        }
+        
+        .data-loading p {
+            color: #8E8E93;
+            font-size: 14px;
+        }
+        
+        .data-error {
+            text-align: center;
+            padding: 40px 20px;
+            color: #636366;
+        }
+        
+        .data-error button {
+            margin-top: 16px;
+            padding: 12px 24px;
+            background: #1A5F5A;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+        }
     </style>
-<base target="_blank">
 </head>
 <body>
     <div class="app-container">
@@ -755,142 +790,157 @@
         </div>
         
         <div class="content" id="mainContent">
-            <!-- Store Card - DISAPPEARS when retrieved -->
-            <div class="store-card" id="storeCard">
-                <div class="store-logo">
-                    <span id="storeLogoText">Le P'tit<br>Mitron</span>
-                </div>
-                <h2 class="store-name" id="storeName">Le P'tit Mitron</h2>
-                <p class="store-address" id="storeAddress">144 Rue Saint-Denis, 93100 Montreuil, France</p>
-                <a href="#" class="find-store-btn">
-                    Trouver le commerce
-                    <svg viewBox="0 0 24 24">
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                        <circle cx="12" cy="10" r="3"/>
-                    </svg>
-                </a>
+            <!-- Loading State -->
+            <div class="data-loading" id="dataLoading">
+                <div class="spinner"></div>
+                <p>Chargement de la commande...</p>
             </div>
             
-            <!-- Order Card (Initial State) - DISAPPEARS when retrieved -->
-            <div class="order-card" id="orderCard">
-                <div class="tabs">
-                    <div class="tab active" onclick="switchTab(this, 'collect')">Je récupère<br>la commande</div>
-                    <div class="tab" onclick="switchTab(this, 'friend')">Demander à<br>un ami</div>
-                </div>
-                
-                <div class="tab-content" id="collectTab">
-                    <div class="order-details">
-                        <div class="detail-item">
-                            <span class="detail-label">Date</span>
-                            <span class="detail-value" id="orderDate">21 févr. 2026</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Heure de collecte</span>
-                            <span class="detail-value" id="collectTime">19:00 - 21:00</span>
-                        </div>
+            <!-- Error State -->
+            <div class="data-error hidden" id="dataError">
+                <p>Impossible de charger les données</p>
+                <button onclick="loadOrderData()">Réessayer</button>
+            </div>
+            
+            <!-- Main Content (hidden until loaded) -->
+            <div id="orderContent" class="hidden">
+                <!-- Store Card - DISAPPEARS when retrieved -->
+                <div class="store-card" id="storeCard">
+                    <div class="store-logo">
+                        <span id="storeLogoText">Le P'tit<br>Mitron</span>
                     </div>
-                    
-                    <div class="order-item">
-                        <div class="item-info">
-                            <span class="item-label">Panier Surprise</span>
-                            <span class="item-name" id="itemName">1x Panier boulangerie</span>
-                        </div>
-                        <div class="item-info" style="text-align: right;">
-                            <span class="item-label">Total</span>
-                            <span class="item-price" id="itemPrice">2,49 €</span>
-                        </div>
-                    </div>
-                    
-                    <div class="packaging-info">
-                        <div class="packaging-label">Emballage</div>
-                        <div class="packaging-text" id="packagingText">
-                            Le commerçant fournira l'emballage, mais nous vous encourageons à apporter votre propre sac pour ramener le panier chez vous.
-                        </div>
-                    </div>
-                    
-                    <button class="action-btn" id="collectBtn" onclick="openModal()">
-                        Cliquer pour récupérer
-                    </button>
-                    
-                    <button class="reminder-btn">
-                        Recevoir un rappel
+                    <h2 class="store-name" id="storeName">Le P'tit Mitron</h2>
+                    <p class="store-address" id="storeAddress">144 Rue Saint-Denis, 93100 Montreuil, France</p>
+                    <a href="#" class="find-store-btn">
+                        Trouver le commerce
                         <svg viewBox="0 0 24 24">
-                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
-                            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
                         </svg>
-                    </button>
+                    </a>
                 </div>
                 
-                <div class="tab-content hidden" id="friendTab">
-                    <div style="text-align: center; padding: 40px 20px;">
-                        <div style="width: 80px; height: 80px; background: #F5F5F0; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#8E8E93" stroke-width="2">
-                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                                <circle cx="9" cy="7" r="4"/>
-                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                <!-- Order Card (Initial State) - DISAPPEARS when retrieved -->
+                <div class="order-card" id="orderCard">
+                    <div class="tabs">
+                        <div class="tab active" onclick="switchTab(this, 'collect')">Je récupère<br>la commande</div>
+                        <div class="tab" onclick="switchTab(this, 'friend')">Demander à<br>un ami</div>
+                    </div>
+                    
+                    <div class="tab-content" id="collectTab">
+                        <div class="order-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Date</span>
+                                <span class="detail-value" id="orderDate">21 févr. 2026</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Heure de collecte</span>
+                                <span class="detail-value" id="collectTime">19:00 - 21:00</span>
+                            </div>
+                        </div>
+                        
+                        <div class="order-item">
+                            <div class="item-info">
+                                <span class="item-label">Panier Surprise</span>
+                                <span class="item-name" id="itemName">1x Panier boulangerie</span>
+                            </div>
+                            <div class="item-info" style="text-align: right;">
+                                <span class="item-label">Total</span>
+                                <span class="item-price" id="itemPrice">2,49 €</span>
+                            </div>
+                        </div>
+                        
+                        <div class="packaging-info">
+                            <div class="packaging-label">Emballage</div>
+                            <div class="packaging-text" id="packagingText">
+                                Le commerçant fournira l'emballage, mais nous vous encourageons à apporter votre propre sac pour ramener le panier chez vous.
+                            </div>
+                        </div>
+                        
+                        <button class="action-btn" id="collectBtn" onclick="openModal()">
+                            Cliquer pour récupérer
+                        </button>
+                        
+                        <button class="reminder-btn">
+                            Recevoir un rappel
+                            <svg viewBox="0 0 24 24">
+                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                                <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
                             </svg>
-                        </div>
-                        <p style="font-size: 16px; font-weight: 600; color: #1C1C1E; margin-bottom: 8px;">Partager la commande</p>
-                        <p style="font-size: 14px; color: #636366;">Envoyez cette commande à un ami pour qu'il puisse la récupérer à votre place.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="bottom-text" id="bottomText">Sur votre chemin !</div>
-            
-            <!-- Retrieved Card - APPEARS when retrieved (initially hidden) -->
-            <div class="retrieved-card hidden" id="retrievedCard">
-                <div class="status-banner">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M20 6L9 17l-5-5"/>
-                    </svg>
-                    Récupérée
-                </div>
-                <div class="retrieved-content">
-                    <div class="store-row">
-                        <div class="store-logo" style="width: 48px; height: 48px; font-size: 8px;">
-                            <span id="retrievedLogoText">Le P'tit<br>Mitron</span>
-                        </div>
-                        <div>
-                            <div class="store-name-small" id="retrievedStoreName">Le P'tit Mitron</div>
-                            <div class="store-address-small" id="retrievedStoreAddress">144 Rue Saint-Denis, 93100 Montreuil, Fr...</div>
-                        </div>
+                        </button>
                     </div>
                     
-                    <div class="order-details">
-                        <div class="detail-item">
-                            <span class="detail-label">Récupérée</span>
-                            <span class="detail-value" id="retrievedDate">21 févr. 2026</span>
+                    <div class="tab-content hidden" id="friendTab">
+                        <div style="text-align: center; padding: 40px 20px;">
+                            <div style="width: 80px; height: 80px; background: #F5F5F0; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#8E8E93" stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="9" cy="7" r="4"/>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                                </svg>
+                            </div>
+                            <p style="font-size: 16px; font-weight: 600; color: #1C1C1E; margin-bottom: 8px;">Partager la commande</p>
+                            <p style="font-size: 14px; color: #636366;">Envoyez cette commande à un ami pour qu'il puisse la récupérer à votre place.</p>
                         </div>
-                        <div class="detail-item">
-                            <span class="detail-label">N° de commande</span>
-                            <span class="detail-value" style="font-family: monospace; font-size: 13px;" id="retrievedOrderCode">CYEPD376HE060</span>
-                        </div>
-                    </div>
-                    
-                    <div class="order-item">
-                        <div class="item-info">
-                            <span class="item-label">Panier Surprise</span>
-                            <span class="item-name" id="retrievedItemName">1x Panier boulangerie</span>
-                        </div>
-                        <div class="item-info" style="text-align: right;">
-                            <span class="item-label">Total</span>
-                            <span class="item-price" id="retrievedItemPrice">2,49 €</span>
-                        </div>
-                    </div>
-                    
-                    <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid #F2F2F7;">
-                        <div class="detail-label" style="margin-bottom: 4px;">Moyen de paiement</div>
-                        <div class="detail-value" id="retrievedPayment">Credit Card: Mastercard</div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Help Section - APPEARS when retrieved (initially hidden) -->
-            <div class="help-section hidden" id="helpSection">
-                <div class="help-icon">?</div>
-                <div class="help-text">Besoin d'aide ?</div>
+                
+                <div class="bottom-text" id="bottomText">Sur votre chemin !</div>
+                
+                <!-- Retrieved Card - APPEARS when retrieved (initially hidden) -->
+                <div class="retrieved-card hidden" id="retrievedCard">
+                    <div class="status-banner">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M20 6L9 17l-5-5"/>
+                        </svg>
+                        Récupérée
+                    </div>
+                    <div class="retrieved-content">
+                        <div class="store-row">
+                            <div class="store-logo" style="width: 48px; height: 48px; font-size: 8px;">
+                                <span id="retrievedLogoText">Le P'tit<br>Mitron</span>
+                            </div>
+                            <div>
+                                <div class="store-name-small" id="retrievedStoreName">Le P'tit Mitron</div>
+                                <div class="store-address-small" id="retrievedStoreAddress">144 Rue Saint-Denis, 93100 Montreuil, Fr...</div>
+                            </div>
+                        </div>
+                        
+                        <div class="order-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Récupérée</span>
+                                <span class="detail-value" id="retrievedDate">21 févr. 2026</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">N° de commande</span>
+                                <span class="detail-value" style="font-family: monospace; font-size: 13px;" id="retrievedOrderCode">CYEPD376HE060</span>
+                            </div>
+                        </div>
+                        
+                        <div class="order-item">
+                            <div class="item-info">
+                                <span class="item-label">Panier Surprise</span>
+                                <span class="item-name" id="retrievedItemName">1x Panier boulangerie</span>
+                            </div>
+                            <div class="item-info" style="text-align: right;">
+                                <span class="item-label">Total</span>
+                                <span class="item-price" id="retrievedItemPrice">2,49 €</span>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid #F2F2F7;">
+                            <div class="detail-label" style="margin-bottom: 4px;">Moyen de paiement</div>
+                            <div class="detail-value" id="retrievedPayment">Credit Card: Mastercard</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Help Section - APPEARS when retrieved (initially hidden) -->
+                <div class="help-section hidden" id="helpSection">
+                    <div class="help-icon">?</div>
+                    <div class="help-text">Besoin d'aide ?</div>
+                </div>
             </div>
         </div>
     </div>
@@ -955,68 +1005,89 @@
 
     <script>
         // ============================================
-        // CONFIGURATION - MODIFIE CES VALEURS
+        // CONFIGURATION - URL DU REPO DE DONNÉES
         // ============================================
-        const ORDER_CONFIG = {
-            // Infos du magasin
-            storeName: "Le P'tit Mitron",
-            storeAddress: "144 Rue Saint-Denis, 93100 Montreuil, France",
-            storeAddressShort: "144 Rue Saint-Denis, 93100 Montreuil, Fr...",
-            storeLogoText: "Le P'tit<br>Mitron",
-            
-            // Infos de la commande
-            orderDate: "21 févr. 2026",
-            collectTime: "19:00 - 21:00",
-            orderCode: "CYEPD376HE060",
-            
-            // Infos du panier
-            itemName: "1x Panier boulangerie",
-            itemPrice: "2,49 €",
-            quantity: "1x",
-            itemType: "Panier boulangerie",
-            
-            // Paiement
-            paymentMethod: "Credit Card: Mastercard",
-            
-            // Emballage
-            packagingText: "Le commerçant fournira l'emballage, mais nous vous encourageons à apporter votre propre sac pour ramener le panier chez vous."
-        };
+        const DATA_URL = 'https://ton-username.github.io/too-good-to-go-data/shop-data.json';
+        // Remplace par ton vrai username GitHub !
+        
+        let ORDER_CONFIG = null;
         
         // ============================================
-        // INITIALISATION
+        // CHARGEMENT DES DONNÉES
         // ============================================
-        function initOrderData() {
-            // Store card
-            document.getElementById('storeLogoText').innerHTML = ORDER_CONFIG.storeLogoText;
-            document.getElementById('storeName').textContent = ORDER_CONFIG.storeName;
-            document.getElementById('storeAddress').textContent = ORDER_CONFIG.storeAddress;
+        async function loadOrderData() {
+            const loadingEl = document.getElementById('dataLoading');
+            const errorEl = document.getElementById('dataError');
+            const contentEl = document.getElementById('orderContent');
             
-            // Order card
-            document.getElementById('orderDate').textContent = ORDER_CONFIG.orderDate;
-            document.getElementById('collectTime').textContent = ORDER_CONFIG.collectTime;
-            document.getElementById('itemName').textContent = ORDER_CONFIG.itemName;
-            document.getElementById('itemPrice').textContent = ORDER_CONFIG.itemPrice;
-            document.getElementById('packagingText').textContent = ORDER_CONFIG.packagingText;
+            loadingEl.classList.remove('hidden');
+            errorEl.classList.add('hidden');
+            contentEl.classList.add('hidden');
             
-            // Modal
-            document.getElementById('modalQuantity').textContent = ORDER_CONFIG.quantity;
-            document.getElementById('modalItemName').textContent = ORDER_CONFIG.itemType;
-            document.getElementById('modalStoreName').textContent = ORDER_CONFIG.storeName;
-            document.getElementById('modalOrderCode').textContent = ORDER_CONFIG.orderCode;
-            
-            // Retrieved card (hidden initially)
-            document.getElementById('retrievedLogoText').innerHTML = ORDER_CONFIG.storeLogoText;
-            document.getElementById('retrievedStoreName').textContent = ORDER_CONFIG.storeName;
-            document.getElementById('retrievedStoreAddress').textContent = ORDER_CONFIG.storeAddressShort;
-            document.getElementById('retrievedDate').textContent = ORDER_CONFIG.orderDate;
-            document.getElementById('retrievedOrderCode').textContent = ORDER_CONFIG.orderCode;
-            document.getElementById('retrievedItemName').textContent = ORDER_CONFIG.itemName;
-            document.getElementById('retrievedItemPrice').textContent = ORDER_CONFIG.itemPrice;
-            document.getElementById('retrievedPayment').textContent = ORDER_CONFIG.paymentMethod;
+            try {
+                // Ajout d'un timestamp pour éviter le cache
+                const response = await fetch(`${DATA_URL}?t=${Date.now()}`);
+                
+                if (!response.ok) {
+                    throw new Error('Erreur de chargement');
+                }
+                
+                ORDER_CONFIG = await response.json();
+                
+                // Petite pause pour montrer le loading (optionnel)
+                await new Promise(r => setTimeout(r, 500));
+                
+                initOrderData();
+                
+                loadingEl.classList.add('hidden');
+                contentEl.classList.remove('hidden');
+                
+            } catch (error) {
+                console.error('Erreur:', error);
+                loadingEl.classList.add('hidden');
+                errorEl.classList.remove('hidden');
+            }
         }
         
-        // Initialize on load
-        initOrderData();
+        // ============================================
+        // INITIALISATION DES DONNÉES
+        // ============================================
+        function initOrderData() {
+            if (!ORDER_CONFIG) return;
+            
+            const { store, order } = ORDER_CONFIG;
+            
+            // Store card
+            document.getElementById('storeLogoText').innerHTML = store.logoText;
+            document.getElementById('storeName').textContent = store.name;
+            document.getElementById('storeAddress').textContent = store.address;
+            
+            // Order card
+            document.getElementById('orderDate').textContent = order.date;
+            document.getElementById('collectTime').textContent = order.collectTime;
+            document.getElementById('itemName').textContent = order.itemName;
+            document.getElementById('itemPrice').textContent = order.itemPrice;
+            document.getElementById('packagingText').textContent = order.packagingText;
+            
+            // Modal
+            document.getElementById('modalQuantity').textContent = order.quantity;
+            document.getElementById('modalItemName').textContent = order.itemType;
+            document.getElementById('modalStoreName').textContent = store.name;
+            document.getElementById('modalOrderCode').textContent = order.code;
+            
+            // Retrieved card (hidden initially)
+            document.getElementById('retrievedLogoText').innerHTML = store.logoText;
+            document.getElementById('retrievedStoreName').textContent = store.name;
+            document.getElementById('retrievedStoreAddress').textContent = store.addressShort;
+            document.getElementById('retrievedDate').textContent = order.date;
+            document.getElementById('retrievedOrderCode').textContent = order.code;
+            document.getElementById('retrievedItemName').textContent = order.itemName;
+            document.getElementById('retrievedItemPrice').textContent = order.itemPrice;
+            document.getElementById('retrievedPayment').textContent = order.paymentMethod;
+        }
+        
+        // Charger au démarrage
+        loadOrderData();
         
         // ============================================
         // TAB SWITCHING
