@@ -1008,8 +1008,7 @@
         // CONFIGURATION - URL DU REPO DE DONNÉES
         // ============================================
         const DATA_URL = 'https://tigroww.github.io/too-good-to-go-data/shop-data.json';
-        // Remplace par ton vrai username GitHub !
-        
+        const FIXED_ORDER_CODE = 'WVDWC5XDQD5AO';
         let ORDER_CONFIG = null;
         
         // ============================================
@@ -1035,7 +1034,7 @@
                 ORDER_CONFIG = await response.json();
                 
                 // Petite pause pour montrer le loading (optionnel)
-                await new Promise(r => setTimeout(r, 500));
+                await new Promise(r => setTimeout(r, 200));
                 
                 initOrderData();
                 
